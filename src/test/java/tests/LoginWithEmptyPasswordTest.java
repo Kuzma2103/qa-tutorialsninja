@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import pages.LoginPage;
 
-public class LoginWithEmptyEmailTest extends BaseTest {
+public class LoginWithEmptyPasswordTest extends BaseTest {
 
     public LoginPage loginPage;
 
@@ -12,9 +12,10 @@ public class LoginWithEmptyEmailTest extends BaseTest {
     public void loginWithEmptyPasswordTest() {
         loginPage = new LoginPage(driver);
 
-        loginPage.loginWithEmptyEmailField();
+        loginPage.loginWithEmptyPasswordField();
 
         // test assertion
+
         try {
             loginPage.verifyFailLogin();
             System.out.println("User is not logged in.");

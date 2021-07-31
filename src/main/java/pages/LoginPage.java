@@ -19,10 +19,17 @@ public class LoginPage extends BasePage {
         return this;
     }
 
-    // verification methods
-    public LoginPage verifyloginWithEmptyEmailField() {
+    public LoginPage loginWithEmptyPasswordField() {
         methods = new LoginMethods(driver);
-        methods.verifyFailLogin(" Warning: No match for E-Mail Address and/or Password.");
+        methods.loginWithEmptyPassword(PropertyManager.getInstance().getEmail());
         return this;
     }
+
+    // verification methods
+    public LoginPage verifyFailLogin() {
+        methods = new LoginMethods(driver);
+        methods.verifyFailLoginAssertion("Warning: No match for E-Mail Address and/or Password.");
+        return this;
+    }
+
 }

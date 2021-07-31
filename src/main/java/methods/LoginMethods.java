@@ -14,6 +14,7 @@ public class LoginMethods extends BasePage {
     By myAccountBy = By.xpath("//span[text()='My Account']");
     By loginBy = By.xpath("//ul[@class='dropdown-menu dropdown-menu-right']//a[text()='Login']");
 
+    By emailBy = By.id("input-email");
     By passwordBy = By.id("input-password");
     By loginButtonBy = By.xpath("//input[@value='Login']");
 
@@ -34,10 +35,17 @@ public class LoginMethods extends BasePage {
         return this;
     }
 
+    public LoginMethods loginWithEmptyPassword(String email) {
+        navigateToLogin();
+        writeText(emailBy, email);
+        click(loginButtonBy);
+        return this;
+    }
+
     // verification methods
-    public LoginMethods verifyFailLogin(String expectedText) {
+    public LoginMethods verifyFailLoginAssertion(String expectedText) {
         String errorMsg = readText(errorMsgBy);
-        assertTwoEqualStrings(expectedText, expectedText);
+        assertTwoEqualStrings(errorMsg, expectedText);
         return this;
     }
 }
