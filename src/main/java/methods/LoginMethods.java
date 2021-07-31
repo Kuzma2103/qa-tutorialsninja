@@ -28,6 +28,7 @@ public class LoginMethods extends BasePage {
         click(loginBy);
     }
 
+    // login method
     public LoginMethods login(String email, String password) {
         navigateToLogin();
         writeText(emailBy, email);
@@ -36,7 +37,7 @@ public class LoginMethods extends BasePage {
         return this;
     }
 
-    // login with empty username method
+    // login with empty username field
     public LoginMethods loginWithEmptyEmail(String password) {
         navigateToLogin();
         writeText(passwordBy, password);
@@ -44,6 +45,7 @@ public class LoginMethods extends BasePage {
         return this;
     }
 
+    // login with empty password field
     public LoginMethods loginWithEmptyPassword(String email) {
         navigateToLogin();
         writeText(emailBy, email);
@@ -52,12 +54,15 @@ public class LoginMethods extends BasePage {
     }
 
     // verification methods
+
+    // fail login verification
     public LoginMethods verifyFailLoginAssertion(String expectedText) {
         String errorMsg = readText(errorMsgBy);
         assertTwoEqualStrings(errorMsg, expectedText);
         return this;
     }
 
+    // valid login verification
     public LoginMethods verifyValidLogin(String expectedText) {
         String elementText = readText(contentTitleBy);
         assertTwoEqualStrings(elementText, expectedText);
