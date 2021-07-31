@@ -20,11 +20,20 @@ public class LoginMethods extends BasePage {
 
     // verification element references
     By errorMsgBy = By.xpath("//div[@class='alert alert-danger alert-dismissible']");
+    By contentTitleBy = By.xpath("//div[@id='content']//h2[text()='My Account']");
 
     // navigate to login form
     private void navigateToLogin() {
         click(myAccountBy);
         click(loginBy);
+    }
+
+    public LoginMethods login(String email, String password) {
+        navigateToLogin();
+        writeText(emailBy, email);
+        writeText(passwordBy, password);
+        click(loginButtonBy);
+        return this;
     }
 
     // login with empty username method
@@ -46,6 +55,12 @@ public class LoginMethods extends BasePage {
     public LoginMethods verifyFailLoginAssertion(String expectedText) {
         String errorMsg = readText(errorMsgBy);
         assertTwoEqualStrings(errorMsg, expectedText);
+        return this;
+    }
+
+    public LoginMethods verifyValidLogin(String expectedText) {
+        String elementText = readText(contentTitleBy);
+        assertTwoEqualStrings(elementText, expectedText);
         return this;
     }
 }
