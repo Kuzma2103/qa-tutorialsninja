@@ -13,6 +13,9 @@ public class PropertyManager {
     private static String email;
     private static String password;
 
+    private static String bad_email;
+    private static String bad_password;
+
     public static PropertyManager getInstance() {
 
         Properties properties = new Properties();
@@ -33,6 +36,9 @@ public class PropertyManager {
 
         email = properties.getProperty("email");
         password = properties.getProperty("password");
+
+        bad_email = properties.getProperty("bad_email");
+        bad_password = properties.getProperty("bad_password");
 
         return instance;
     }
@@ -56,5 +62,13 @@ public class PropertyManager {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getBadEmail() {
+        return bad_email;
+    }
+
+    public String getBadPassword() {
+        return bad_password;
     }
 }

@@ -12,7 +12,9 @@ public class LoginPage extends BasePage {
 
     public LoginMethods methods;
 
-    // test methods
+    // TEST METHODS
+
+    // valid login
     public LoginPage validLogin() {
         methods = new LoginMethods(driver);
         methods.login(
@@ -22,12 +24,24 @@ public class LoginPage extends BasePage {
         return this;
     }
 
+    // login with wrong user data
+    public LoginPage loginWithWrongUserData() {
+        methods = new LoginMethods(driver);
+        methods.login(
+                PropertyManager.getInstance().getBadEmail(),
+                PropertyManager.getInstance().getBadPassword()
+        );
+        return this;
+    }
+
+    // login with empty email field
     public LoginPage loginWithEmptyEmailField() {
         methods = new LoginMethods(driver);
         methods.loginWithEmptyEmail(PropertyManager.getInstance().getPassword());
         return this;
     }
 
+    // login with empty password field
     public LoginPage loginWithEmptyPasswordField() {
         methods = new LoginMethods(driver);
         methods.loginWithEmptyPassword(PropertyManager.getInstance().getEmail());
