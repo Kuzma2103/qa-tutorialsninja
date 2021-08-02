@@ -26,4 +26,20 @@ public class CheckoutPage extends BasePage {
         method.checkoutWithRegisterAccount(userData);
         return this;
     }
+
+    // purchase with user login
+    public CheckoutPage purchaseItemAsLoggedInUser(ArrayList<String> userData) throws InterruptedException {
+        method = new CheckoutMethod(driver);
+        method.checkoutWithUserLogin(userData);
+        return this;
+    }
+
+    // verification methods
+
+    // verify purchase as user logged in
+    public CheckoutPage verifyPurchaseItemAsLoggedInUser() {
+        method = new CheckoutMethod(driver);
+        method.verifyCheckoutWithUserLogin("Your order has been placed!");
+        return this;
+    }
 }

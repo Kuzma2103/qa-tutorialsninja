@@ -28,6 +28,11 @@ public class CheckoutMethod extends BasePage {
     By buttonAccountBy = By.id("button-account");
     By buttonGuestBy = By.id("button-guest");
     By buttonRegisterBy = By.id("button-register");
+    By buttonPaymentAddressBy = By.id("button-payment-address");
+    By buttonShippingAddressBy = By.id("button-shipping-address");
+    By buttonShippingMethodBy = By.id("button-shipping-method");
+    By buttonPaymentMethodBy = By.id("button-payment-method");
+    By buttonConfirmBy = By.id("button-confirm");
 
     // form data
     By firstNameBy = By.id("input-payment-firstname");
@@ -47,10 +52,17 @@ public class CheckoutMethod extends BasePage {
     // checkbox
     By termsConditionsCheckmarkBy = By.xpath("//input[@type='checkbox'][@name='agree']");
 
-
+    // for purchasing camera
+    By camerasLinkBy = By.xpath("//ul[@class='nav navbar-nav']//li//a[text()='Cameras']");
+    By cameraTitleBy = By.xpath("//div[@class='caption']//h4//a[text()='Nikon D300']");
+    By addToCartButtonBy = By.id("button-cart");
 
     // warning message
     By warningMessageBy = By.xpath("//div[@class='alert alert-warning alert-dismissible']");
+
+    // asertion element references
+    By messageBy = By.xpath("//div[@id='content']//h1");
+
 
     // add item to the cart
     private void buyItem() {
@@ -80,6 +92,21 @@ public class CheckoutMethod extends BasePage {
     private void fillPassword(String password) {
         writeText(passwordBy, password);
         writeText(confirmPasswordBy, password);
+    }
+
+    // fill the form for first purchase after user registration
+    private void fillBillingDetails(ArrayList<String> userData) {
+        writeText(firstNameBy, userData.get(0));
+        writeText(lastNameBy, userData.get(1));
+        writeText(addressBy, userData.get(5));
+        writeText(cityBy, userData.get(6));
+        writeText(postCodeBy, userData.get(7));
+        // selection
+        Select country = new Select(driver.findElement(countryBy));
+        country.selectByValue("243");
+        Select state = new Select(driver.findElement(regionStateBy));
+        state.selectByValue("3994");
+        click(buttonPaymentAddressBy);
     }
 
     // checkout as a guest user
@@ -117,6 +144,43 @@ public class CheckoutMethod extends BasePage {
                 warningMessageBy,
                 "Warning: No Payment options are available. Please contact us for assistance!"
         );
+        return this;
+    }
+
+    // checkout with login user - purchasing the photo camera nikon d300
+    public CheckoutMethod checkoutWithUserLogin(ArrayList<String> userData) throws InterruptedException {
+        click(camerasLinkBy);
+        click(cameraTitleBy);
+        click(addToCartButtonBy);
+        click(cartButtonBy);
+        click(checkoutButtonBy);
+
+        // check if it's first purchase after registration.
+        // If it is user must fill the form, otherwise don't.
+
+        if ( driver.findElement(firstNameBy).isDisplayed()) {
+            DataCreation.createData(userData);
+            fillBillingDetails(userData);
+        }
+
+        click(buttonPaymentAddressBy);
+        click(buttonShippingAddressBy);
+        click(buttonShippingMethodBy);
+        click(termsConditionsCheckmarkBy);
+        click(buttonPaymentMethodBy);
+        click(buttonConfirmBy);
+        // wait to load next page
+        Thread.sleep(2000);
+
+        return this;
+    }
+
+    // verification methods
+
+    // verify purchase as login user
+    public CheckoutMethod verifyCheckoutWithUserLogin(String expectedText) {
+        String message = readText(messageBy);
+        assertTwoEqualStrings(message, expectedText);
         return this;
     }
 }
