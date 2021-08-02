@@ -43,4 +43,17 @@ public class BasePage {
         Assert.assertEquals(actualText, expectedText);
     }
 
+    // check if warning message is displayed
+    public boolean checkActiveWarning(By elementRef, String warningText) {
+        String element = readText(elementRef);
+
+        if (element.contains(warningText)) {
+            System.out.println("Bug found. Guest user cannot make the purchase.");
+            return true;
+        } else {
+            System.out.println("There is no warning message.");
+            return false;
+        }
+    }
+
 }

@@ -4,9 +4,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import pages.BasePage;
 
-public class LoginMethods extends BasePage {
+public class LoginMethod extends BasePage {
 
-    public LoginMethods(WebDriver driver) {
+    public LoginMethod(WebDriver driver) {
         super(driver);
     }
 
@@ -29,7 +29,7 @@ public class LoginMethods extends BasePage {
     }
 
     // login method
-    public LoginMethods login(String email, String password) {
+    public LoginMethod login(String email, String password) {
         navigateToLogin();
         writeText(emailBy, email);
         writeText(passwordBy, password);
@@ -38,7 +38,7 @@ public class LoginMethods extends BasePage {
     }
 
     // login with empty username field
-    public LoginMethods loginWithEmptyEmail(String password) {
+    public LoginMethod loginWithEmptyEmail(String password) {
         navigateToLogin();
         writeText(passwordBy, password);
         click(loginButtonBy);
@@ -46,7 +46,7 @@ public class LoginMethods extends BasePage {
     }
 
     // login with empty password field
-    public LoginMethods loginWithEmptyPassword(String email) {
+    public LoginMethod loginWithEmptyPassword(String email) {
         navigateToLogin();
         writeText(emailBy, email);
         click(loginButtonBy);
@@ -56,14 +56,14 @@ public class LoginMethods extends BasePage {
     // verification methods
 
     // fail login verification
-    public LoginMethods verifyFailLoginAssertion(String expectedText) {
+    public LoginMethod verifyFailLoginAssertion(String expectedText) {
         String errorMsg = readText(errorMsgBy);
         assertTwoEqualStrings(errorMsg, expectedText);
         return this;
     }
 
     // valid login verification
-    public LoginMethods verifyValidLogin(String expectedText) {
+    public LoginMethod verifyValidLogin(String expectedText) {
         String elementText = readText(contentTitleBy);
         assertTwoEqualStrings(elementText, expectedText);
         return this;
