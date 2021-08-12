@@ -56,4 +56,16 @@ public class BasePage {
         }
     }
 
+    // check if element is visible on page
+    public boolean elementIsVisible(By elementRef) {
+
+        if (driver.findElement(elementRef).isDisplayed()) {
+            System.out.println("Element is visible.");
+            return true;
+        } else {
+            System.out.println("Element is not visible.");
+            return false;
+        }
+    }
+
 }
