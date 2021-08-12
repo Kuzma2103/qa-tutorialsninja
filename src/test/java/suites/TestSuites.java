@@ -3,9 +3,8 @@ package suites;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import tests.*;
-import tests_with_login.AddToWishListTest;
-import tests_with_login.CheckoutWithLoginTest;
-import tests_with_login.LogoutTest;
+import tests_with_login.*;
+
 
 @RunWith(Suite.class)
 
@@ -20,7 +19,8 @@ import tests_with_login.LogoutTest;
         CheckoutWithLoginTest.class,
         CheckoutAsGuestTest.class,
         RemoveItemFromCartTest.class,
-        AddToWishListTest.class
+        AddToWishListTest.class,
+        RemoveFromWishListTest.class
 })
 
 public class TestSuites {
