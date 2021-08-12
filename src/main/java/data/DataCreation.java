@@ -28,6 +28,9 @@ public class DataCreation extends BasePage {
         userData.add(faker.address().city()); // 6 City
         userData.add(faker.number().digits(5)); // 7 Post Code
 
+        // contact us message
+        userData.add(faker.chuckNorris().fact()); // 8 Contact Message
+
         return userData;
     }
 }

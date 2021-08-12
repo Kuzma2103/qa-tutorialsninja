@@ -20,7 +20,8 @@ import tests_with_login.*;
         CheckoutAsGuestTest.class,
         RemoveItemFromCartTest.class,
         AddToWishListTest.class,
-        RemoveFromWishListTest.class
+        RemoveFromWishListTest.class,
+        ContactTest.class
 })
 
 public class TestSuites {
