@@ -34,12 +34,26 @@ public class CheckoutPage extends BasePage {
         return this;
     }
 
+    // remove item from cart
+    public CheckoutPage removeItemFromCart() throws Exception {
+        method = new CheckoutMethod(driver);
+        method.removeItem();
+        return this;
+    }
+
     // verification methods
 
     // verify purchase as user logged in
     public CheckoutPage verifyPurchaseItemAsLoggedInUser() {
         method = new CheckoutMethod(driver);
         method.verifyCheckoutWithUserLogin("Your order has been placed!");
+        return this;
+    }
+
+    // verify remove item
+    public CheckoutPage verifyRemoveItemFromCart() {
+        method = new CheckoutMethod(driver);
+        method.verifyRemoveItem("0 item(s) - $0.00");
         return this;
     }
 }

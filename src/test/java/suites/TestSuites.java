@@ -18,6 +18,7 @@ import tests_with_login.LogoutTest;
         LogoutTest.class,
         CheckoutWithLoginTest.class,
         CheckoutAsGuestTest.class,
+        RemoveItemFromCartTest.class
 })
 
 public class TestSuites {

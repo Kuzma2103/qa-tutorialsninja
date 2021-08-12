@@ -33,6 +33,8 @@ public class CheckoutMethod extends BasePage {
     By buttonShippingMethodBy = By.id("button-shipping-method");
     By buttonPaymentMethodBy = By.id("button-payment-method");
     By buttonConfirmBy = By.id("button-confirm");
+    By removeItemButtonBy = By.xpath("//button[@title='Remove']");
+    By directAddToCartBy = By.xpath("//*[@id='content']/div[2]/div[2]/div/div[3]/button[1]");
 
     // form data
     By firstNameBy = By.id("input-payment-firstname");
@@ -55,13 +57,14 @@ public class CheckoutMethod extends BasePage {
     // for purchasing camera
     By camerasLinkBy = By.xpath("//ul[@class='nav navbar-nav']//li//a[text()='Cameras']");
     By cameraTitleBy = By.xpath("//div[@class='caption']//h4//a[text()='Nikon D300']");
-    By addToCartButtonBy = By.id("button-cart");
+
 
     // warning message
     By warningMessageBy = By.xpath("//div[@class='alert alert-warning alert-dismissible']");
 
-    // asertion element references
+    // assertion element references
     By messageBy = By.xpath("//div[@id='content']//h1");
+    By cartTotalBy = By.id("cart-total");
 
 
     // add item to the cart
@@ -151,7 +154,7 @@ public class CheckoutMethod extends BasePage {
     public CheckoutMethod checkoutWithUserLogin(ArrayList<String> userData) throws InterruptedException {
         click(camerasLinkBy);
         click(cameraTitleBy);
-        click(addToCartButtonBy);
+        click(addToCartBy);
         click(cartButtonBy);
         click(checkoutButtonBy);
 
@@ -175,12 +178,28 @@ public class CheckoutMethod extends BasePage {
         return this;
     }
 
+    // remove item from cart
+    public CheckoutMethod removeItem() throws Exception {
+        click(directAddToCartBy);
+        // pause to load element
+        Thread.sleep(1000);
+        click(cartButtonBy);
+        click(removeItemButtonBy);
+        return this;
+    }
+
     // verification methods
 
     // verify purchase as login user
     public CheckoutMethod verifyCheckoutWithUserLogin(String expectedText) {
         String message = readText(messageBy);
         assertTwoEqualStrings(message, expectedText);
+        return this;
+    }
+
+    public CheckoutMethod verifyRemoveItem(String expectedText) {
+        String elementText = readText(cartTotalBy);
+        assertTwoEqualStrings(elementText, expectedText);
         return this;
     }
 }
